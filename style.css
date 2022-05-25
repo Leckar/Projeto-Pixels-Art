@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;	
+}
+
+body {
+	background-image: radial-gradient(circle, white, gray);
+}
+
+#title {
+	font-size: 3em;
+	text-align: center;
+}
+
+#color-palette {
+	display: flex;
+	justify-content: center;
+}
+
+.color {
+	height: 50px;
+	width: 50px;
+	border: solid 1px gray;
+}
+
+.color:first-of-type {
+	background-color: black;
+}
+
+
