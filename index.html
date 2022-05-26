@@ -26,7 +26,7 @@
 				<!-- foi encontrado no site StackOverflow, no link: -->
 				<!-- https://stackoverflow.com/questions/31575496/prevent-negative-inputs-in-form-input-type-number/ -->
 				<!-- Utilizei dessa execução por achar a implementação mais simples que no JavaScript. -->
-				<input type="number" min="0" oninput="validity.valid||(value='');" id="board-size">
+				<input type="number" min="1" oninput="validity.valid||(value='');" id="board-size">
 				<button id="generate-board">VQV</button>
 				<button id="clear-board">Limpar</button>
 			</div>

@@ -27,7 +27,7 @@ body {
 .color {
 	height: 50px;
 	width: 50px;
-	border: solid 1px gray;
+	border: solid 1px black;
 }
 #input-row {
 	display: flex;
@@ -48,7 +48,4 @@ input {
 	height: 40px;
 	border: solid black 1px;
 	background-color: white;
-}
-.selected {
-	border: 3px red solid;
 }
