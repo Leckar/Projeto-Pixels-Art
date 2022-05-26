@@ -1,5 +1,8 @@
+const colorPalettes = document.getElementsByClassName('color');
+const pixels = document.getElementsByClassName('pixel');
+const pixelBoard = document.getElementById('pixel-board');
+
 //Gerador de cores aleatórias para as paletas;
-const colorPalettes = document.querySelectorAll('.color');
 function randomRGBNumber() {
 	return Math.round(Math.random() * 230);
 }
@@ -16,8 +19,26 @@ function paletteColorSetter() {
 		}
 	}
 }
+
+//Função que muda a cor selecionada;
+function colorSelector(event) {
+	const selected = document.querySelector('.selected');
+	selected.classList.remove('selected');
+	event.target.classList.add('selected');
+}
+function colorListener() {
+	for (let i = 0; i < colorPalettes.length; i += 1) {
+		colorPalettes[i].addEventListener('click', colorSelector);
+	}
+}
+
+//Função que muda a cor do "pixel";
+function colorChange(event) {
+	const newColor = document.getElementsByClassName('selected')[0].style.backgroundColor;
+	event.target.style.backgroundColor = newColor;
+}
+
 //Gerador do board;
-const pixelBoard = document.getElementById('pixel-board');
 function boardCell() {
 	const newDiv = document.createElement('div');
 	newDiv.classList.add('pixel');
@@ -37,9 +58,23 @@ function boardBuilder(sideSize) {
 		boardRows(sideSize);
 	}
 }
-
+function boardEraser() {
+	pixelBoard.children.splice(0);
+}
+function boardReset() {
+	boardEraser();
+	boardBuilder(5);
+}
+//Função que ativa o listener dos pixeis;
+function pixelHunting() {
+	for (let i = 0; i < pixels.length; i += 1) {
+		pixels[i].addEventListener('click', colorChange);
+	}
+}
 //Função que carrega todos os elementos quando a página carrega;
 window.onload = () => {
 	paletteColorSetter();
+	colorListener();
 	boardBuilder(5);
+	pixelHunting();
 }

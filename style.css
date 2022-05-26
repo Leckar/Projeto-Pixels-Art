@@ -4,6 +4,8 @@
 }
 body {
 	background-image: linear-gradient(to right, gray 35%, white , gray);
+	width: 100%;
+	justify-content: center;
 }
 #title {
 	font-size: 3em;
