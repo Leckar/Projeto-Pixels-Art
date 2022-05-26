@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,54 +15,22 @@
 		<main>
 			<section id="top-bar">
 				<div id="color-palette">
-					<div class="color"></div>
+					<div class="color selected"></div>
 					<div class="color"></div>
 					<div class="color"></div>
 					<div class="color"></div>
 				</div>
 				<div id="input-row">
-					<input type="text" id="board-size">
+					<!-- A funcionalidade abaixo para impedir o input de números fora dos valores mínimos e máximos -->
+					<!-- foi encontrado no site StackOverflow, no link: -->
+					<!-- https://stackoverflow.com/questions/31575496/prevent-negative-inputs-in-form-input-type-number/ -->
+					<!-- Utilizei dessa execução por achar a implementação mais simples que no JavaScript. -->
+					<input type="number" min="0" oninput="validity.valid||(value='');" id="board-size">
 					<button id="generate-board">VQV</button>
 					<button id="clear-board">Limpar</button>
 				</div>
-			
 			</section>
 			<section id="pixel-board">
-				<div class="row">
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-				</div>
-				<div class="row">
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-				</div>
-				<div class="row">
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-				</div>
-				<div class="row">
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-				</div>
-				<div class="row">
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-					<div  class="pixel"></div>
-				</div>
 			</section>
 		</main>
 	</header>

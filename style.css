@@ -27,12 +27,12 @@ body {
 	width: 50px;
 	border: solid 1px gray;
 }
-.color:first-of-type {
-	background-color: black;
-}
 #input-row {
 	display: flex;
 	justify-content: center;
+}
+input {
+	text-align: center;
 }
 #pixel-board {
 	justify-content: center;
@@ -46,4 +46,7 @@ body {
 	height: 40px;
 	border: solid black 1px;
 	background-color: white;
+}
+.selected {
+	border: 3px red solid;
 }
