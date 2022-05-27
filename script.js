@@ -63,8 +63,8 @@ function freshBoardCell() {
 function boardCell(sideSize) {
   const newDiv = document.createElement('div');
   newDiv.classList.add('pixel');
-  newDiv.style.width = `${400 / sideSize}px`;
-  newDiv.style.height = `${400 / sideSize}px`;
+  newDiv.style.width = `${450 / sideSize}px`;
+  newDiv.style.height = `${450 / sideSize}px`;
   return newDiv;
 }
 // Função que cria as linhas e ancora os pixels no window.load;
