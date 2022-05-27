@@ -6,6 +6,14 @@ const boardClearButton = document.getElementById('clear-board');
 const boardSizeInput = document.getElementById('board-size');
 const boardSizeGenerator = document.getElementById('generate-board');
 let sizeValue = 5;
+let paint = false;
+// Funções que alteram o valor da boolean;
+function enablePaint() {
+  paint = true;
+}
+function disablePaint() {
+  paint = false;
+}
 // Gerador dos valores aleatórios do rgb;
 function randomRGBNumber() {
   return Math.round(Math.random() * 230);
@@ -31,6 +39,7 @@ function colorSelector(event) {
   selected.classList.remove('selected');
   event.target.classList.add('selected');
 }
+// FUnção que gera os listeners das paletas
 function colorListener() {
   for (let i = 0; i < colorPalettes.length; i += 1) {
     colorPalettes[i].addEventListener('click', colorSelector);
@@ -38,15 +47,35 @@ function colorListener() {
 }
 // Função que muda a cor do "pixel";
 function colorChange(event) {
-  const newColor = document.getElementsByClassName('selected')[0].style.backgroundColor;
-  const cell = event;
-  cell.style.backgroundColor = newColor;
+  if (paint) {
+    const newColor = document.getElementsByClassName('selected')[0].style.backgroundColor;
+    const cell = event;
+    cell.style.backgroundColor = newColor;
+  }
 }
-// Gerador dos pixels individuais;
-function boardCell() {
+// Gerador dos pixels individuais no window.load;
+function freshBoardCell() {
   const newDiv = document.createElement('div');
   newDiv.classList.add('pixel');
   return newDiv;
+}
+// Gerador dos pixels individuais;
+function boardCell(sideSize) {
+  const newDiv = document.createElement('div');
+  newDiv.classList.add('pixel');
+  newDiv.style.width = `${400 / sideSize}px`;
+  newDiv.style.height = `${400 / sideSize}px`;
+  return newDiv;
+}
+// Função que cria as linhas e ancora os pixels no window.load;
+function freshBoardRows() {
+  const newRow = document.createElement('div');
+  newRow.classList.add('row');
+  pixelBoard.appendChild(newRow);
+  for (let i = 0; i < 5; i += 1) {
+    const newCell = freshBoardCell();
+    newRow.appendChild(newCell);
+  }
 }
 // Função que cria as linhas e ancora os pixels;
 function boardRows(sideSize) {
@@ -54,8 +83,14 @@ function boardRows(sideSize) {
   newRow.classList.add('row');
   pixelBoard.appendChild(newRow);
   for (let i = 0; i < sideSize; i += 1) {
-    const newCell = boardCell();
+    const newCell = boardCell(sideSize);
     newRow.appendChild(newCell);
+  }
+}
+// Função que cria o board no window.load;
+function freshBoardBuilder() {
+  for (let i = 0; i < 5; i += 1) {
+    freshBoardRows();
   }
 }
 // Função que cria o board;
@@ -91,10 +126,12 @@ function boardKiller() {
 }
 // Função que refaz o board;
 function generateNewBoard(value) {
-  if (!validityCheck(value)) {
-    return alert('Board inválido!');
+  let inputValue = value;
+  if (!validityCheck(inputValue)) {
+    alert('Board inválido!');
+    inputValue = 0;
   }
-  sizeValue = boardSizeLimiter(value);
+  sizeValue = boardSizeLimiter(inputValue);
   boardBuilder(sizeValue);
 }
 // Função que para o eventListener dos pixels;
@@ -117,7 +154,9 @@ function boardReset() {
 // Função que ativa o listener dos pixeis;
 function pixelPainting() {
   for (let i = 0; i < pixels.length; i += 1) {
-    pixels[i].addEventListener('click', (e) => colorChange(e.target));
+    pixels[i].addEventListener('mousemove', (e) => colorChange(e.target));
+    pixels[i].onmousedown = enablePaint;
+    pixels[i].onmouseup = disablePaint;
   }
 }
 // Função que interrompe os listeners e deleta o board;
@@ -143,7 +182,7 @@ function boardButtonListener() {
 window.onload = () => {
   paletteColorSetter();
   colorListener();
-  boardBuilder(5);
+  freshBoardBuilder();
   pixelPainting();
   boardReset();
   boardButtonListener();
